@@ -1,69 +1,102 @@
-import Image from "next/image";
+
+"use client";
+
+import { useState } from "react";
 
 export default function Home() {
+  const [role, setRole] = useState<"eleve" | "parent" | null>(null);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="min-h-screen bg-slate-50 text-slate-900">
+      <section className="mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-8">
+        <header className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-black tracking-tight">SCOLYRA</h1>
+            <p className="text-sm text-slate-500">
+              Apprendre. Comprendre. S’organiser. Progresser.
+            </p>
+          </div>
+
+          <div className="hidden rounded-full bg-white px-4 py-2 text-sm font-semibold shadow-sm sm:block">
+            🎓 Éducation
+          </div>
+        </header>
+
+        <section className="flex flex-1 flex-col items-center justify-center py-16 text-center">
+          <span className="mb-5 rounded-full bg-indigo-100 px-4 py-2 text-sm font-semibold text-indigo-700">
+            La réussite scolaire commence ici
+          </span>
+
+          <h2 className="max-w-4xl text-4xl font-black leading-tight sm:text-6xl">
+            Une méthode plus simple pour{" "}
+            <span className="text-indigo-600">mieux apprendre.</span>
+          </h2>
+
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+            SCOLYRA accompagne les élèves et les parents avec des ressources
+            pédagogiques claires, pratiques et accessibles.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+          <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:flex-row">
+            <button
+              onClick={() => window.location.href="/eleve"}
+              className="rounded-2xl bg-indigo-600 px-6 py-4 font-bold text-white shadow-lg transition hover:bg-indigo-700"
+            >
+              👨‍🎓 Je suis élève
+            </button>
+
+            <button
+              onClick={() => window.location.href="/parent"}
+              className="rounded-2xl border border-slate-200 bg-white px-6 py-4 font-bold shadow-sm transition hover:bg-slate-100"
+            >
+              👨‍👩‍👧 Je suis parent
+            </button>
+          </div>
+
+          {role && (
+            <div className="mt-8 rounded-2xl bg-white p-6 text-center shadow-md">
+              <p className="font-bold">
+                {role === "eleve"
+                  ? "Bienvenue, futur champion ! 🚀"
+                  : "Bienvenue sur SCOLYRA ! ❤️"}
+              </p>
+              <p className="mt-2 text-sm text-slate-500">
+                Ton espace personnalisé arrive bientôt.
+              </p>
+            </div>
+          )}
+        </section>
+
+        <section className="grid gap-4 pb-8 sm:grid-cols-3">
+          <div className="rounded-2xl bg-white p-6 shadow-sm">
+            <div className="text-3xl">📚</div>
+            <h3 className="mt-3 font-bold">Réviser efficacement</h3>
+            <p className="mt-2 text-sm text-slate-500">
+              Des fiches synthétiques pour aller à l’essentiel.
+            </p>
+          </div>
+
+          <div className="rounded-2xl bg-white p-6 shadow-sm">
+            <div className="text-3xl">🧠</div>
+            <h3 className="mt-3 font-bold">Mieux comprendre</h3>
+            <p className="mt-2 text-sm text-slate-500">
+              Des explications simples adaptées au niveau de chaque élève.
+            </p>
+          </div>
+
+          <div className="rounded-2xl bg-white p-6 shadow-sm">
+            <div className="text-3xl">🎯</div>
+            <h3 className="mt-3 font-bold">Progresser</h3>
+            <p className="mt-2 text-sm text-slate-500">
+              Un accompagnement orienté vers les objectifs et la réussite.
+            </p>
+          </div>
+        </section>
+
+        <footer className="border-t border-slate-200 py-6 text-center text-sm text-slate-500">
+          © 2026 SCOLYRA — Apprendre autrement.
+        </footer>
+      </section>
+    </main>
   );
 }
